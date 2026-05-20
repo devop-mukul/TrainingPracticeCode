@@ -17,7 +17,7 @@ export default function ProductList() {
                     <button
                         onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}
                     >
-                        Add To Cart ➕
+                        Add To Cart +
                     </button>
                 </div>
             ))}
