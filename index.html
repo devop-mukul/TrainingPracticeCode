@@ -1,0 +1,210 @@
+<!--
+    Demo Site: CSS Display & Positioning Concepts
+    Hinglish Comments for Revision & Demo
+-->
+<html>
+<head>
+    <title>CSS Display & Positioning Demo</title>
+    <style>
+        /* Block element: poora line occupy karta hai */
+        .block-demo {
+            display: block;
+            background: #e0f7fa;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        /* Inline element: sirf jitna content utna space leta hai */
+        .inline-demo {
+            display: inline;
+            background: #ffe0b2;
+            padding: 5px 20px;
+        }
+
+        /* Inline-block: inline ki tarah line me, lekin width/height set kar sakte ho */
+        .inline-block-demo {
+            display: inline-block;
+            background: #c8e6c9;
+            width: 120px;
+            height: 40px;
+            margin: 2px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        /* Flexbox: ek row/column me items ko arrange karta hai */
+        .flex-demo {
+            display: flex;
+            gap: 10px;
+            background: #f3e5f5;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .flex-item {
+            background: #b39ddb;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        /* Grid: 2D layout, rows & columns */
+        .grid-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 5px;
+            background: #fff9c4;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .grid-item {
+            background: #fff176;
+            padding: 10px;
+            text-align: center;
+            border-radius: 100px;
+        }
+
+        /* display: none; element dikhai nahi deta, DOM me hota hai */
+        .none-demo {
+            display: none;
+        }
+
+        /* Positioning Examples */
+        .relative-demo {
+            position: relative;
+            background: #b2ebf2;
+            width: 200px;
+            height: 80px;
+            padding: 5px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .absolute-demo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ffccbc;
+            padding: 5px 10px;
+            border-radius: 10px;
+        }
+        .fixed-demo {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: #c5e1a5;
+            padding: 8px 16px;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        .sticky-demo {
+            position: sticky;
+            top: 0;
+            background: #f8bbd0;
+            padding: 8px;
+            font-weight: bold;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Display & Positioning Demo</h1>
+
+    <!-- Block element -->
+    <div class="block-demo">Yeh ek <b>block</b> element hai (div)</div>
+
+    <!-- Inline elements -->
+    <span class="inline-demo">Inline 1</span>
+    <span class="inline-demo">Inline 2</span>
+    <span class="inline-demo">Inline 3</span>
+
+    <br><br>
+    <!-- Inline-block elements -->
+    <span class="inline-block-demo">Inline-Block 1</span>
+    <span class="inline-block-demo">Inline-Block 2</span>
+    <span class="inline-block-demo">Inline-Block 3</span>
+
+    <h2>Flexbox Example</h2>
+    <div class="flex-demo">
+        <div class="flex-item">Flex 1</div>
+        <div class="flex-item">Flex 2</div>
+        <div class="flex-item">Flex 3</div>
+    </div>
+
+    <h2>Grid Example</h2>
+    <div class="grid-demo">
+        <div class="grid-item">Grid 1</div>
+        <div class="grid-item">Grid 2</div>
+        <div class="grid-item">Grid 3</div>
+        <div class="grid-item">Grid 4</div>
+        <div class="grid-item">Grid 5</div>
+        <div class="grid-item">Grid 6</div>
+    </div>
+
+    <!-- display: none example (yeh dikhai nahi dega) -->
+    <div class="none-demo">Yeh hidden hai (display: none)</div>
+
+    <h2>Positioning Examples</h2>
+    <div class="relative-demo">
+        Relative box (parent)
+        <div class="absolute-demo">Absolute child (top:10px, left:10px)</div>
+    </div>
+
+    <div class="sticky-demo">Sticky Header (scroll karo, yeh top pe chipak jayega)</div>
+    <div style="height: 200px; background: #f0f0f0; margin-bottom: 20px;">Scroll area for sticky demo</div>
+
+    <div style="height: 400px;"></div>
+    <div class="fixed-demo">Fixed Button (hamesha bottom-right pe)</div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <main role="main" class="container">
+        <form action="/submit" method="post">
+            <label for="name">Name:</label>
+            <input type="color" id="name" name="name" required>Select
+            <button type="submit">Submit</button>
+        </form>
+        <!-- <button aria-label="Close" onclick="closeModal()">X</button> -->
+        <header>
+        <h1>Welcome to My Website</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        </header>
+        <section>
+            <!-- <header>1. Semantic Topic</header> -->
+            <h2>Sports News</h2>
+            <p>1. India won the match!</p>
+        </section>
+        
+        <section>
+            <h2>Technology News</h2>
+            <p>1. New smartphone released!</p>
+            <footer> &copy; 2024 Technology News. All rights reserved.</footer>
+        </section>
+
+        <article>
+            <h2>My Blog</h2>
+            <p>Yeh mera pehla blog hai!</p>
+                <article> 
+                    <h3>Sub Article</h3>
+                    <p>Yeh mera sub article hai!</p>
+                </article>
+        </article>
+
+        <footer>
+            <p>&copy; 2024 My Website. All rights reserved.</p>
+        </footer>
+    </main>
+    
+</body>
+</html>
