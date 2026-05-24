@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import CartContext from '../context/CartContext'
 
 function ProductList() {
-    const { dispatch } = useContext(CartContext)
+    const { state, dispatch } = useContext(CartContext)
 
-    // console.log("dispatch===>", dispatch);
+    // const clearCart = () => {
+    //     dispatch({ type: "CLEAR_CART" })//reducer ko signal bhejna
+    // }
     return (
         <>
             <h3>Product List</h3>
@@ -28,6 +30,12 @@ function ProductList() {
                         }}>Add to Cart +</button>
                 </div>
             </ul>
+            {state.items.length > 0 && (
+                <button
+                    onClick={() => dispatch({ type: "CLEAR_CART" })}>
+                    Clear Cart
+                </button>
+            )}
         </>
     )
 }
