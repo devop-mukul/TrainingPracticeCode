@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Typography, Box, Button } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import TextField from '@mui/material/TextField';
@@ -8,21 +8,25 @@ import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 
-export default function Navbar({ searchTerm, setSearchTerm }) {
+import { ProductContext } from '../context/ProductContext'
+
+export default function Navbar() {
+    const { searchTerm, setSearchTerm } = useContext(ProductContext)
     return (
-        <Box sx={{
-            position:'sticky',
+        <AppBar sx={{
+            position:'fixed',
             top:0, left:0, right: 0,
             zIndex: 1300,
             display: 'flex',
+            flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
             p: 1,
             borderBottom: '1px solid lightgray',
-            mb: 2,
+            mb: 0,
             backgroundColor: 'white',
         }}>
-            <Typography variant="h4" fontWeight='bold'>ShopSphere</Typography>
+            <Typography variant="h4" fontWeight='bold' sx={{color:'black'}}>ShopSphere</Typography>
             {/* <Box>Search</Box> */}
             <TextField 
                 id="searchProducts" 
@@ -30,9 +34,10 @@ export default function Navbar({ searchTerm, setSearchTerm }) {
                 variant="outlined" 
                 size="small"
                 value={searchTerm}
+                sx={{backgroundColor:'white', borderRadius:2, boxShadow:5}}
                 onChange={(e) => {setSearchTerm(e.target.value)}}/>
             <Button variant="contained" startIcon={<ShoppingCartIcon/>}>Cart</Button>
-        </Box>
+        </AppBar>
             // <AppBar position="static">
             //     <Toolbar sx={{justifyContent:'space-between'}}>
             //         <Typography variant="h4" fontWeight='bold' component="div" sx={{ flexGrow: 1 }}>

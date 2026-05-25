@@ -7,14 +7,18 @@ import ProductCard from './components/Card'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 
-import {useEffect, useMemo, useState} from 'react';
+
+import { useEffect, useMemo, useState, useContext } from 'react';
+
+import { ProductContext } from './context/ProductContext'
 
 function App() {
   const [products, setProducts] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
+  // const [searchTerm, setSearchTerm] = useState('')
+  const { searchTerm, setSearchTerm } = useContext(ProductContext)
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [selectedCategories, setSelectedCategories] = useState([])
-  const [selectedPriceRange, setSelectedPriceRange] = useState([0, 100])
+  const [selectedPriceRange, setSelectedPriceRange] = useState([0, 1000])
 
   useEffect(() => {
      async function fetchProducts() {
@@ -71,6 +75,7 @@ function App() {
         product.price >= minPrice && 
         product.price <= maxPrice
 
+      // const matchesRating
       return matchesSearch && matchesCategory && matchesPriceRange
     })
   }, [products, debouncedSearch, selectedCategories, selectedPriceRange])
@@ -78,8 +83,8 @@ function App() {
   return (
       <Box sx={{p:2}}>
         {/* <Typography variant='h4' sx={{textAlign:'center', fontWeight:'bold', mb:3}}>ShopSphere</Typography> */}
-        <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-          <Box sx={{display:'flex', flexDirection:'row', mt:4}}>
+        <Navbar />
+          <Box sx={{display:'flex', flexDirection:'row', mt:6}}>
                 <Sidebar
                   categories={categories}
                   selectedCategories={selectedCategories}
