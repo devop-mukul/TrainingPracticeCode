@@ -24,9 +24,10 @@ export default function ProductCard({ image, title, description, price, rating }
                 ${price}
             </Typography>
             <Rating
-                sx={{p:0.5}}
-                name="simple-controlled"
+                sx={{p:0, justifyContent:'left'}}
+                name="read-only"
                 value={rating.rate}
+                readOnly
                 // onChange={(e) => {
                 //     setValue(newValue);
                 // }}

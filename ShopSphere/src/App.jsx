@@ -7,12 +7,14 @@ import ProductCard from './components/Card'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 
 function App() {
   const [products, setProducts] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
+  const [selectedCategories, setSelectedCategories] = useState([])
+  const [selectedPriceRange, setSelectedPriceRange] = useState([0, 100])
 
   useEffect(() => {
      async function fetchProducts() {
@@ -20,7 +22,7 @@ function App() {
       // const response = await fetch('https://dummyjson.com/products')
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       
       setProducts(data);
     }
@@ -36,17 +38,55 @@ function App() {
       clearTimeout(timer)
     }
   }, [searchTerm])
+  
+  const categories = [...new Set(products.map(product => product.category))]
+  // const category = [...new Set(products.category)]
+  // console.log("category", category);
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(debouncedSearch.toLowerCase())
-  )
+  function filterCategory(cat) {
+    setSelectedCategories((prev) => {
+
+      const alreadySelected = prev.includes(cat)
+
+      if(alreadySelected)
+        return prev.filter((item) => item !== cat)
+
+      return [...prev, cat]
+    })
+  }
+
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) => {
+      const matchesSearch = product.title
+        .toLowerCase()
+        .includes(debouncedSearch.toLowerCase())
+
+      const matchesCategory =
+        selectedCategories.length === 0
+          ? true
+          : selectedCategories.includes(product.category)
+
+      const [ minPrice, maxPrice ] = selectedPriceRange
+      const matchesPriceRange = 
+        product.price >= minPrice && 
+        product.price <= maxPrice
+
+      return matchesSearch && matchesCategory && matchesPriceRange
+    })
+  }, [products, debouncedSearch, selectedCategories, selectedPriceRange])
 
   return (
       <Box sx={{p:2}}>
         {/* <Typography variant='h4' sx={{textAlign:'center', fontWeight:'bold', mb:3}}>ShopSphere</Typography> */}
         <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-          <Box sx={{display:'flex', flexDirection:'row'}}>
-              <Sidebar />
+          <Box sx={{display:'flex', flexDirection:'row', mt:4}}>
+                <Sidebar
+                  categories={categories}
+                  selectedCategories={selectedCategories}
+                  onCategoryClick={(cat) => filterCategory(cat)}
+                  setSelectedPriceRange={setSelectedPriceRange}
+                  selectedPriceRange={selectedPriceRange}
+                />
               <Box sx={{ display:'flex', flexWrap:'wrap', gap:2, p:2, justifyContent:'center'}}>
                 {filteredProducts.map((product) => (
                 //() - implicit return krta hai, {} - explicit return krna padta hai

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Typography, Box, Button} from '@mui/material'
+import { Typography, Box, Button } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import TextField from '@mui/material/TextField';
 
@@ -11,7 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 export default function Navbar({ searchTerm, setSearchTerm }) {
     return (
         <Box sx={{
-            position:'fixed',
+            position:'sticky',
             top:0, left:0, right: 0,
             zIndex: 1300,
             display: 'flex',
