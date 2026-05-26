@@ -1,12 +1,28 @@
-import { Typography, Box, Checkbox, FormGroup, FormControlLabel, Slider, Stack } from '@mui/material'
-import React, { useState } from 'react'
+import { Typography, Box, Checkbox, FormGroup, FormControlLabel, Slider, Stack, Rating } from '@mui/material'
+import React, { useContext, useState } from 'react'
+import { ProductContext } from '../context/ProductContext'
 
-export default function Sidebar({ categories = [], selectedCategories = [], onCategoryClick, selectedPriceRange, setSelectedPriceRange }) {
-    // const [price, setPrice] = useState([0, 50])
+export default function Sidebar() {
+    // const [selectedRating, setSelectedRating] = useState(0)
+    // const { selectedRating } = useContext(ProductContext)
+    const {
+        categories,
+        selectedCategories,
+        filterCategory,
+        selectedPriceRange,
+        setSelectedPriceRange,
+        // filterRating,
+        selectedRating,
+        setSelectedRating,
+    } = useContext(ProductContext)
 
     const handlePrice = (_, newPrice) => {
         // setPrice(newPrice)
         setSelectedPriceRange(newPrice)
+    }
+
+    const handleRating = (_, newRating) => {
+        setSelectedRating(newRating ?? 0)
     }
 
     function priceText(price) {
@@ -23,17 +39,17 @@ export default function Sidebar({ categories = [], selectedCategories = [], onCa
                         control={<Checkbox checked={selectedCategories.includes(category)} />} 
                         label={<Typography noWrap>{category}</Typography>} 
                         key={category}
-                        onChange={() => onCategoryClick?.(category)} />
+                        onChange={() => filterCategory(category)} />
                 ))}
             </FormGroup>
             <Typography variant="subtitle1" sx={{ fontWeight:'bold' }}>Price</Typography>
-            <Stack sx={{width:'150px', display:'flex', flexDirection:'row', fontWeight:'bold'}}>
+            <Stack sx={{ width:'150px', display:'flex', flexDirection:'row', fontWeight:'bold' }}>
                 <Typography>{selectedPriceRange[0]}$</Typography>
                 -
                 <Typography>{selectedPriceRange[1]}$</Typography>
             </Stack>
             <Slider sx={{ width:'150px' }}
-                // getAriaLabel={() => 'Price Range'}
+                getAriaLabel={() => 'Price Range'}
                 getAriaValueText={priceText}
                 valueLabelDisplay="auto"
                 value={selectedPriceRange}
@@ -44,6 +60,12 @@ export default function Sidebar({ categories = [], selectedCategories = [], onCa
                 />
             
             <Typography variant="subtitle1" sx={{fontWeight:'bold'}}>Ratings</Typography>
+            <Rating
+                name="simple-controlled"
+                value={selectedRating}
+                onChange={handleRating}
+            />
+            
         </Box>
     )
 }

@@ -1,0 +1,19 @@
+app js
+    layout
+
+components
+    card
+    navbar
+    sidebar
+
+layout
+    navbar
+    sidebar
+    
+
+pages
+    loginPage
+    home/productgrid
+
+
+

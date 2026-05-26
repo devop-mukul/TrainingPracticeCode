@@ -38,22 +38,5 @@ export default function Navbar() {
                 onChange={(e) => {setSearchTerm(e.target.value)}}/>
             <Button variant="contained" startIcon={<ShoppingCartIcon/>}>Cart</Button>
         </AppBar>
-            // <AppBar position="static">
-            //     <Toolbar sx={{justifyContent:'space-between'}}>
-            //         <Typography variant="h4" fontWeight='bold' component="div" sx={{ flexGrow: 1 }}>
-            //             ShopSphere
-            //         </Typography>
-            //         <Box>
-            //             <TextField 
-            //                 id="searchProducts" 
-            //                 label="Search..." 
-            //                 variant="outlined" 
-            //                 size="small"
-            //                 value={searchTerm}
-            //                 onChange={(e) => {setSearchTerm(e.target.value)}}/>
-            //             <Button color="success" variant='contained' startIcon={<ShoppingCartIcon/>}>Cart</Button>
-            //         </Box>
-            //     </Toolbar>
-            // </AppBar>
     );
 }
