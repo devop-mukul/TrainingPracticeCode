@@ -8,7 +8,21 @@ import Rating from '@mui/material/Rating';
 
 export default function ProductCard({ image, title, description, price, rating }) {
   return (
-    <Card sx={{ maxWidth: 300, display:'flex', flexDirection:'column', justifyContent:'center' }}>
+    <Card 
+        sx={{ 
+            maxWidth: 300, 
+            display:'flex', 
+            flexDirection:'column', 
+            justifyContent:'center',
+            bgcolor: 'background.paper',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease-in',
+            boxShadow: 1,
+            '&:hover': {
+                transform: 'scale(1.05)',
+                boxShadow: 5,
+                backgroundColor: 'action.hover'
+            }
+        }}>
         <CardMedia
             sx={{ objectFit:'contain' }}
             component="img"
@@ -33,7 +47,7 @@ export default function ProductCard({ image, title, description, price, rating }
                 // }}
             />
 
-            <Typography gutterBottom variant="body2" sx={{color:'gray', minHeight:4}}>
+            <Typography gutterBottom variant="body2" sx={{color:'text.secondary', minHeight:4}}>
                 {description.slice(0, 80)}...
             </Typography>
         </CardContent>

@@ -24,9 +24,9 @@ export default function Navbar() {
             p: 1,
             borderBottom: '1px solid lightgray',
             mb: 0,
-            backgroundColor: 'white',
+            backgroundColor: 'primary.light',
         }}>
-            <Typography variant="h4" fontWeight='bold' sx={{color:'black'}}>ShopSphere</Typography>
+            <Typography variant="h4" sx={{color:'black', fontWeight:'bold'}}>ShopSphere</Typography>
             {/* <Box>Search</Box> */}
             <TextField 
                 id="searchProducts" 
@@ -34,7 +34,7 @@ export default function Navbar() {
                 variant="outlined" 
                 size="small"
                 value={searchTerm}
-                sx={{backgroundColor:'white', borderRadius:2, boxShadow:5}}
+                sx={{backgroundColor:'white', borderRadius:1}}
                 onChange={(e) => {setSearchTerm(e.target.value)}}/>
             <Button variant="contained" startIcon={<ShoppingCartIcon/>}>Cart</Button>
         </AppBar>
