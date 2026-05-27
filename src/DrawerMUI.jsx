@@ -10,7 +10,7 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import LogoutIcon from '@mui/icons-material/Logout'
 
 export default function DrawerMUI() {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
     const drawerWidth = 250
     const menuItems = [
         {
