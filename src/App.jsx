@@ -7,6 +7,8 @@ import CheckboxMUI from './CheckboxMUI'
 import DialogMUI from './DialogMUI'
 import DrawerMUI from './DrawerMUI'
 import SnackbarMUI from './SnackbarMUI'
+import PaperMUI from './PaperMUI'
+import TableMUI from './TableMUI'
 
 function App() {
 
@@ -18,7 +20,9 @@ function App() {
       {/* <CheckboxMUI /> */}
       {/* <DialogMUI /> */}
       {/* <DrawerMUI /> */}
-      <SnackbarMUI />
+      {/* <SnackbarMUI /> */}
+      {/* <PaperMUI /> */}
+      <TableMUI />
     </>
   );
 }
