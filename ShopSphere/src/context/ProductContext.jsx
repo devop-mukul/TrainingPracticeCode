@@ -60,16 +60,12 @@ export function ProductProvider({ children }) {
             const matchesPriceRange =
                 product.price >= minPrice && product.price <= maxPrice
 
-            if(product.rating.rate >= selectedRating) {
-                console.log("compare",product.rating.rate, selectedRating, product.rating.rate >= selectedRating);
-            }
             const matchesRating = Math.round(product.rating.rate) >= selectedRating
 
             return matchesSearch && matchesCategory && matchesPriceRange && matchesRating
         })
     }, [products, debouncedSearch, selectedCategories, selectedPriceRange, selectedRating])
 
-    console.log("filteredproducts", filteredProducts)
     const value = {
         searchTerm,
         setSearchTerm,

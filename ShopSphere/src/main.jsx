@@ -4,16 +4,24 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import './index.css'
 import App from './App.jsx'
 
-import {ProductProvider} from './context/ProductContext'
+import {BrowserRouter} from 'react-router-dom'
+
+import { ProductProvider } from './context/ProductContext'
+import { CartProvider } from './context/CartContext'
+
 import theme from './theme'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <ProductProvider>
-        <App />
-      </ProductProvider>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <ProductProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </ProductProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   </StrictMode>,
 )

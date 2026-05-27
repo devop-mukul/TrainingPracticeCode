@@ -43,9 +43,9 @@ export default function Sidebar() {
                 ))}
             </FormGroup>
             <Typography variant="subtitle1" sx={{ fontWeight:'bold' }}>Price</Typography>
-            <Stack sx={{ width:'150px', display:'flex', flexDirection:'row', fontWeight:'bold' }}>
+            <Stack spacing={2} direction='row' sx={{ width:'150px', fontWeight:'bold' }}>
                 <Typography>{selectedPriceRange[0]}$</Typography>
-                -
+                <Typography>-</Typography>
                 <Typography>{selectedPriceRange[1]}$</Typography>
             </Stack>
             <Slider sx={{ width:'150px' }}
