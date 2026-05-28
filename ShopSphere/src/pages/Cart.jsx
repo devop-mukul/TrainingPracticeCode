@@ -12,6 +12,7 @@ import {
     IconButton,
     Box,
 } from '@mui/material'
+
 import { Rating } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
@@ -22,8 +23,10 @@ import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 
+const inrFormat = new Intl.NumberFormat('en-IN');
+
 export default function Cart() {
-    const cardWidth = 800
+    const cardWidth = 1000
     const {
         cartItem,
         handleIncrease,
@@ -50,7 +53,7 @@ export default function Cart() {
                     <Divider/>
 
                     {cartItem.length === 0 ? (
-                        <CardContent sx={{ p: 5 }}>
+                        <CardContent sx={{ p: 3, mb:2 }}>
                             <Typography variant='h6' sx={{ mb: 2 }}>
                                 Your cart is empty.
                             </Typography>
@@ -71,12 +74,12 @@ export default function Cart() {
                                         alignItems: 'flex-start',
                                         gap: 2,
                                         borderRadius: 0,
-                                        boxShadow: 'none',
+                                        boxShadow: 'contain',
                                         borderBottom: '1px solid',
                                         borderColor: 'divider',
                                     }}
                                 >
-                                    <Stack direction='row' spacing={2} sx={{ flex: 1 }}>
+                                    <Stack direction='row' spacing={3} sx={{ flex: 1 }}>
                                         <CardMedia
                                             sx={{
                                                 objectFit: 'contain',
@@ -88,10 +91,10 @@ export default function Cart() {
                                             alt={item.title}
                                         />
 
-                                        <CardContent sx={{ p: 0, '&:last-child': { pb: 0 } }}>
+                                        <CardContent sx={{ p: 1, '&:last-child': { pb: 0 } }}>
                                             <Typography variant='h6' sx={{fontWeight:'bold'}}>{item.title}</Typography>
                                             <Rating
-                                                name={`rating-${item.id}`}
+                                                name={`rating-${item.id}`}//dynamic naming of rating
                                                 value={item.rating.rate}
                                                 readOnly
                                                 size='small'
@@ -134,9 +137,9 @@ export default function Cart() {
                                     </Stack>
 
                                     <CardContent sx={{ p: 0, '&:last-child': { pb: 0 } }}>
-                                        <Typography variant='h6'>₹{Math.round(item.price * 90 * item.quantity)}</Typography>
+                                        <Typography variant='h6'>₹{inrFormat.format(Math.round(item.price * 90 * item.quantity))}</Typography>
                                         <Typography variant='body2' color='text.secondary'>
-                                            ₹{Math.round(item.price * 90)} each
+                                            ₹{inrFormat.format(Math.round(item.price * 90))} per item
                                         </Typography>
                                     </CardContent>
                                 </Card>
@@ -147,15 +150,15 @@ export default function Cart() {
 
                 <Card
                     sx={{
-                        width:cardWidth-300,
-                        maxHeight:"50vh",
+                        width:cardWidth-"auto",
+                        maxHeight:"30vh",
                         p:2
                     }}
                 >
                     <CardContent>
                         <Typography variant='body1' color='text.secondary'>Items: {totalItems}</Typography>
                         <Typography variant="h5" sx={{ mt: 1 }}>
-                            Subtotal: <b>₹{Math.round(subtotalInr)}</b>
+                            Subtotal: <b>₹{inrFormat.format(Math.round(subtotalInr))}</b>
                         </Typography>
                     </CardContent>
                     <CardActions sx={{ display: 'flex', gap: 1 }}>

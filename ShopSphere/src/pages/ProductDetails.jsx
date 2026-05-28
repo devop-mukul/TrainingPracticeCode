@@ -7,13 +7,17 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import Navbar from '../components/Navbar';
 import { CartContext } from '../context/CartContext';
 
+const inrFormat = new Intl.NumberFormat('en-IN');
+
 export default function ProductDetails() {
   const { id } = useParams();
   const { products } = useContext(ProductContext);
   const { cartItem, handleIncrease, handleDecrease } = useContext(CartContext);
+
   const product = products.find((p) => String(p.id) === String(id));
   const cartProduct = cartItem.find((item) => String(item.id) === String(id));
-
+  // console.log("product", product, "cartproduct", cartProduct);
+  
   if (!product) {
     return (
       <Box sx={{ p: 4 }}>
@@ -27,7 +31,7 @@ export default function ProductDetails() {
   return (
     <>
       <Navbar />
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', p: 4 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', p: 5 }}>
         <Card sx={{ maxWidth: 700, width: '100%', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, p: 2 }}>
           <CardMedia
             component="img"
@@ -38,8 +42,8 @@ export default function ProductDetails() {
           <CardContent sx={{ flex: 1 }}>
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>{product.title}</Typography>
             <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 1 }}>{product.category}</Typography>
-            <Rating value={product.rating?.rate || 0} readOnly precision={0.1} sx={{ mb: 1 }} />
-            <Typography variant="h6" color="primary" sx={{ mb: 2 }}>₹{Math.round(product.price * 90)}</Typography>
+            <Rating value={product.rating?.rate || 0} readOnly precision={0.5} sx={{ mb: 1 }} />
+            <Typography variant="h6" color="primary" sx={{ mb: 2 }}>₹{inrFormat.format(Math.round(product.price * 90))}</Typography>
             <Typography variant="body1" sx={{ mb: 2 }}>{product.description}</Typography>
             <Stack direction="row" spacing={2} alignItems="center">
               {!cartProduct ? (

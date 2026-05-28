@@ -2,6 +2,8 @@ import { Typography, Box, Checkbox, FormGroup, FormControlLabel, Slider, Stack, 
 import React, { useContext, useState } from 'react'
 import { ProductContext } from '../context/ProductContext'
 
+const inrFormat = new Intl.NumberFormat('en-IN');
+
 export default function Sidebar() {
     // const [selectedRating, setSelectedRating] = useState(0)
     // const { selectedRating } = useContext(ProductContext)
@@ -26,8 +28,8 @@ export default function Sidebar() {
     }
 
     function priceText(price) {
-        return `${price}$`
-    } 
+        return `₹${inrFormat.format(price * 90)}`;
+    }
 
     return(
         <Box sx={{ width: '200px', p: 1, gap: 2 , display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
@@ -44,9 +46,9 @@ export default function Sidebar() {
             </FormGroup>
             <Typography variant="subtitle1" sx={{ fontWeight:'bold' }}>Price</Typography>
             <Stack spacing={2} direction='row' sx={{ width:'150px', fontWeight:'bold' }}>
-                <Typography>{selectedPriceRange[0]}$</Typography>
+                <Typography>{priceText(selectedPriceRange[0])}</Typography>
                 <Typography>-</Typography>
-                <Typography>{selectedPriceRange[1]}$</Typography>
+                <Typography>{priceText(selectedPriceRange[1])}</Typography>
             </Stack>
             <Slider sx={{ width:'150px' }}
                 getAriaLabel={() => 'Price Range'}
@@ -57,7 +59,8 @@ export default function Sidebar() {
                 min={0}
                 max={1000}
                 onChange={handlePrice}
-                />
+                valueLabelFormat={priceText}
+            />
             
             <Typography variant="subtitle1" sx={{fontWeight:'bold'}}>Ratings</Typography>
             <Rating

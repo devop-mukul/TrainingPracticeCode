@@ -16,6 +16,9 @@ import {Link} from 'react-router-dom'
 
 import { styled } from '@mui/material/styles';
 
+import PersonIcon from '@mui/icons-material/Person';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 export default function Navbar() {
     const { searchTerm, setSearchTerm } = useContext(ProductContext)
     const { totalItems } = useContext(CartContext)
@@ -34,50 +37,86 @@ export default function Navbar() {
             position:'fixed',
             top:0, left:0, right: 0,
             zIndex: 1300,
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            p: 1,
             borderBottom: '1px solid lightgray',
-            mb: 0,
             backgroundColor: 'primary.light',
         }}>
-            <Typography variant="h4" sx={{color:'white', fontWeight:'bold', textShadow:'2px 2px 2px black'}}>ShopSphere</Typography>
-            <Stack direction='row'>
-                <Button 
-                    component={Link}
-                    to='/' 
-                    variant="text" 
-                    sx={{color:'primary.contrastText', textShadow:'2px 2px 2px black'}}>Home</Button>
-                <Button 
-                    component={Link}
-                    to='/about'
-                    variant="text" 
-                    sx={{color:'primary.contrastText', textShadow:'2px 2px 2px black'}}>About</Button>
-            </Stack>
-            <TextField 
-                id="searchProducts" 
-                label="Search..." 
-                variant="outlined" 
-                size="small"
-                value={searchTerm}
-                sx={{backgroundColor:'white', borderRadius:1}}
-                onChange={(e) => {setSearchTerm(e.target.value)}}/>
-            <Button 
-                component={Link}
-                to='/cart'
-                variant="text" 
-                startIcon={
-                    <CartBadge
-                        badgeContent={totalItems}
-                        color="error"
-                        overlap="circular"
-                    >
-                        <ShoppingCartIcon />
-                    </CartBadge>
-                }
-            >Cart</Button>
+            <Toolbar
+                sx={{
+                    display:'flex',
+                    justifyContent:'space-between',
+                    alignItems:'center',
+                    gap: 3
+                }}
+            >
+                <Box
+                >
+                    <Stack direction='row' spacing={1}
+                        sx={{
+                            display:'flex',
+                            alignItems:'center',
+                            gap:2
+                        }}
+                        >
+                            <Typography variant="h4" sx={{color:'white', fontWeight:'bold'}}>ShopSphere</Typography>
+                            <Button 
+                                component={Link}
+                                to='/' 
+                                variant="text" 
+                                sx={{color:'primary.contrastText'}}>Home</Button>
+                            <Button 
+                                component={Link}
+                                to='/about'
+                                variant="text" 
+                                sx={{color:'primary.contrastText'}}>About</Button>
+                            <Button 
+                                variant="text" 
+                                sx={{color:'primary.contrastText'}}
+                                endIcon={<ArrowDropDownIcon />}>Categories</Button>
+                    </Stack>
+                </Box>
+                <Box
+                    sx={{display:'flex',
+                        flexGrow:1,
+                        justifyContent:'center'
+                    }}
+                >
+                    <TextField 
+                        id="searchProducts" 
+                        label="Search..." 
+                        variant="outlined" 
+                        size="small"
+                        value={searchTerm}
+                        sx={{
+                            backgroundColor:'white', 
+                            borderRadius: 1, 
+                            maxWidth:'500px', 
+                            width:'100%'
+                        }}
+                        onChange={(e) => {setSearchTerm(e.target.value)}}/>
+                </Box>
+                <Box>
+                    <Stack direction='row' spacing={2} alignItems="center">
+                        <Button 
+                            sx={{color:'white'}}
+                            component={Link}
+                            to='/cart'
+                            variant="text" 
+                            startIcon={
+                                <CartBadge
+                                    badgeContent={totalItems}
+                                    color="error"
+                                    overlap="circular"
+                                >
+                                    <ShoppingCartIcon />
+                                </CartBadge>
+                            }
+                        >Cart</Button>
+                        <Button startIcon={<PersonIcon />} sx={{color:'white'}}>
+                            Login
+                        </Button>
+                    </Stack>
+                </Box>
+            </Toolbar>
         </AppBar>
     );
 }

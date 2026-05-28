@@ -15,6 +15,8 @@ import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 import { useNavigate } from 'react-router-dom'
 
+const inrFormat = new Intl.NumberFormat('en-IN');
+
 export default function ProductCard({ productId, image, title, description, price, rating }) {
     const { cartItem, handleIncrease, handleDecrease } = useContext(CartContext)
     const navigate = useNavigate();
@@ -42,7 +44,7 @@ export default function ProductCard({ productId, image, title, description, pric
                 justifyContent: 'center',
                 bgcolor: 'background.paper',
                 transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease-in',
-                boxShadow: 1,
+                boxShadow: 2,
                 cursor: 'pointer',
                 '&:hover': {
                     transform: 'scale(1.05)',
@@ -56,6 +58,7 @@ export default function ProductCard({ productId, image, title, description, pric
                 sx={{ objectFit: 'contain' }}
                 component="img"
                 height="200"
+                width="200"
                 image={image}
                 alt={title}
             />
@@ -64,7 +67,7 @@ export default function ProductCard({ productId, image, title, description, pric
                     {title}
                 </Typography>
                 <Typography variant='subtitle' sx={{ display: 'flex', fontWeight: 'bold', py: 0.5 }}>
-                    ₹{price * 90}
+                    ₹{inrFormat.format(price * 90)}
                 </Typography>
                 <Rating
                     sx={{ display: 'flex', justifyContent: 'left', py: 0.2 }}
