@@ -6,7 +6,7 @@ import {Rating} from '@mui/material'
 
 import {Link} from 'react-router-dom'
 
-import {useContext} from 'react'
+import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 
 export default function Cart() {
@@ -21,6 +21,8 @@ export default function Cart() {
     }
     const cardWidth = 800
     const { cartItem, setCartItem } = useContext(CartContext)
+    console.log(cartItem);
+    
     return (
         <>
             <Navbar />
