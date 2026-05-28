@@ -89,16 +89,16 @@ export default function Cart() {
                                         />
 
                                         <CardContent sx={{ p: 0, '&:last-child': { pb: 0 } }}>
-                                            <Typography variant='h6'>{item.title}</Typography>
+                                            <Typography variant='h6' sx={{fontWeight:'bold'}}>{item.title}</Typography>
                                             <Rating
                                                 name={`rating-${item.id}`}
                                                 value={item.rating.rate}
                                                 readOnly
                                                 size='small'
                                             />
-                                            <Typography variant='body2' color='text.secondary' sx={{ mt: 1 }}>
+                                            {/* <Typography variant='body2' color='text.secondary' sx={{ mt: 1 }}>
                                                 {item.description.slice(0, 120)}...
-                                            </Typography>
+                                            </Typography> */}
 
                                             <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
                                                 <IconButton

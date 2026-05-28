@@ -14,6 +14,7 @@ import About from './pages/About'
 import Login from './pages/Login'
 import Cart from './pages/Cart'
 import PaymentPage from './pages/PaymentPage'
+import ProductDetails from './pages/ProductDetails'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
           </Routes>
       </Box>
     </>
