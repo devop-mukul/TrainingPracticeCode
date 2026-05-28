@@ -60,7 +60,7 @@ export default function Navbar() {
                             <Typography variant="h4" sx={{color:'white', fontWeight:'bold'}}>ShopSphere</Typography>
                             <Button 
                                 component={Link}
-                                to='/' 
+                                to='/home' 
                                 variant="text" 
                                 sx={{color:'primary.contrastText'}}>Home</Button>
                             <Button 
@@ -95,7 +95,9 @@ export default function Navbar() {
                         onChange={(e) => {setSearchTerm(e.target.value)}}/>
                 </Box>
                 <Box>
-                    <Stack direction='row' spacing={2} alignItems="center">
+                    <Stack direction='row' spacing={2} 
+                            // alignItems="center"
+                    >
                         <Button 
                             sx={{color:'white'}}
                             component={Link}

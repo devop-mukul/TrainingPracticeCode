@@ -57,7 +57,7 @@ export default function Cart() {
                             <Typography variant='h6' sx={{ mb: 2 }}>
                                 Your cart is empty.
                             </Typography>
-                            <Button component={Link} to='/' variant='contained'>
+                            <Button component={Link} to='/home' variant='contained'>
                                 Continue Shopping
                             </Button>
                         </CardContent>

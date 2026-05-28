@@ -21,8 +21,8 @@ function App() {
     <>
       <Box sx={{ p: 2, pt: '72px', bgcolor: 'background.default'}}>
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/payment" element={<PaymentPage />} />
