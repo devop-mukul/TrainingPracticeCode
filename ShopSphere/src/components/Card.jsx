@@ -15,10 +15,8 @@ import {useContext} from 'react'
 import {CartContext} from '../context/CartContext'
 
 export default function ProductCard({ productId, image, title, description, price, rating }) {
-    // const cartQuantity = 2
-    const { cartItem, setCartItem, handleIncrease } = useContext(CartContext)
-    // console.log("cart item", cartItem);
-    
+    const { cartItem, handleIncrease, handleDecrease } = useContext(CartContext)
+
     const existingCartItem = cartItem.find((item) => {
         return item.id === productId
     })
@@ -58,9 +56,6 @@ export default function ProductCard({ productId, image, title, description, pric
                     name="read-only"
                     value={rating.rate}
                     readOnly
-                    // onChange={(e) => {
-                    //     setValue(newValue);
-                    // }}
                 />
                 <Typography gutterBottom variant="body2" sx={{color:'text.secondary', minHeight:4, py:1}}>
                     {description.slice(0, 80)}...
@@ -74,9 +69,6 @@ export default function ProductCard({ productId, image, title, description, pric
                             onClick={() => {handleIncrease(productId)}}
                         >BUY</Button>
                     ) : (
-                        // <Button variant="contained" startIcon={<RemoveIcon/>} endIcon={<AddIcon/>}>
-                        //     {cartQuantity}
-                        // </Button> //Isme increase decrease handle nahi ho payega
                         <Box
                             sx={{
                                 display:'flex',
@@ -88,7 +80,7 @@ export default function ProductCard({ productId, image, title, description, pric
                                 borderRadius:1,
                             }}
                         >
-                            <IconButton size="small">
+                            <IconButton size="small" onClick={() => handleDecrease(productId)}>
                                 <RemoveIcon fontSize="small"/>
                             </IconButton>
                             <Typography>{existingCartItem.quantity}</Typography>

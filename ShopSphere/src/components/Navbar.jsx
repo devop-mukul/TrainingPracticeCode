@@ -17,8 +17,8 @@ import {Link} from 'react-router-dom'
 import { styled } from '@mui/material/styles';
 
 export default function Navbar() {
-    const { searchTerm, setSearchTerm, filteredProducts } = useContext(ProductContext)
-    const {cartItem} = useContext(CartContext)
+    const { searchTerm, setSearchTerm } = useContext(ProductContext)
+    const { totalItems } = useContext(CartContext)
     const CartBadge = styled(Badge)(({ theme }) => ({
         [`& .${badgeClasses.badge}`]: {
             top: -0.5,
@@ -70,7 +70,7 @@ export default function Navbar() {
                 variant="text" 
                 startIcon={
                     <CartBadge
-                        badgeContent={cartItem.length}
+                        badgeContent={totalItems}
                         color="error"
                         overlap="circular"
                     >
