@@ -41,7 +41,7 @@ export default function Login() {
                 />
                 <TextField
                     autoFocus
-                    autoComplete={true}
+                    autoComplete="true"
                     sx={{p:2, my:0}}
                     margin="normal"
                     size="small"
@@ -57,7 +57,7 @@ export default function Login() {
                     }}
                 />
                 <TextField
-                    autoComplete={true}
+                    autoComplete="true"
                     type='password'
                     sx={{p:2, my:0, mb:0}}
                     // margin="normal"
@@ -74,7 +74,7 @@ export default function Login() {
                     }}
                 />
 
-                <Typography variant="subtitle2" sx={{color:'#9f9f9f', m:0, px:2, py:1}}>Forgot Password?</Typography>
+                <Typography variant="subtitle2" sx={{color:'#9f9f9f', m:0, px:2, py:1, cursor:'pointer'}}>Forgot Password?</Typography>
 
                 <Button 
                     variant="contained"
