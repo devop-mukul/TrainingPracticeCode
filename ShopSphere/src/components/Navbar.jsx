@@ -12,7 +12,7 @@ import Badge, { badgeClasses } from '@mui/material/Badge';
 import { ProductContext } from '../context/ProductContext'
 import { CartContext } from '../context/CartContext'
 
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 
 import { styled } from '@mui/material/styles';
 
@@ -59,13 +59,19 @@ export default function Navbar() {
                         >
                             <Typography variant="h4" sx={{color:'white', fontWeight:'bold'}}>ShopSphere</Typography>
                             <Button 
-                                component={Link}
+                                component={NavLink}
                                 to='/home' 
+                                style={({ isActive }) => ({
+                                    color: isActive ? 'yellow' : 'white'
+                                })}
                                 variant="text" 
                                 sx={{color:'primary.contrastText'}}>Home</Button>
                             <Button 
-                                component={Link}
+                                component={NavLink}
                                 to='/about'
+                                style={({ isActive }) => ({
+                                    color: isActive ? 'yellow' : 'white'
+                                })}
                                 variant="text" 
                                 sx={{color:'primary.contrastText'}}>About</Button>
                             <Button 
@@ -100,7 +106,10 @@ export default function Navbar() {
                     >
                         <Button 
                             sx={{color:'white'}}
-                            component={Link}
+                            component={NavLink}
+                            style={({ isActive }) => ({
+                                color: isActive ? 'yellow' : 'white'
+                            })}
                             to='/cart'
                             variant="text" 
                             startIcon={

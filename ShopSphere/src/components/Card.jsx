@@ -93,6 +93,7 @@ export default function ProductCard({ productId, image, title, description, pric
                     <Box
                         sx={{
                             display: 'flex',
+ 
                             alignItems: 'center',
                             bgcolor: 'primary.light',
                             color: 'white',

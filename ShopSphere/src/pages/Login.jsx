@@ -30,7 +30,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(email, password)
-    navigate(`/home`)
+    navigate(`/home`, { replace: true})
   }
 
     return (

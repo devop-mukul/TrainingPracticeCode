@@ -18,7 +18,8 @@ import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import DeleteIcon from '@mui/icons-material/Delete'
 
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
@@ -27,15 +28,29 @@ const inrFormat = new Intl.NumberFormat('en-IN');
 
 export default function Cart() {
     const cardWidth = 1000
+    const navigate = useNavigate()
     const {
         cartItem,
+        setCartItem,
         handleIncrease,
         handleDecrease,
         removeFromCart,
         clearCart,
+        saveCartBeforeCheckout,
         subtotalInr,
         totalItems,
     } = useContext(CartContext)
+
+    async function handleProceedToBuy() {
+        clearCart()
+        const saved = await saveCartBeforeCheckout()
+
+        if (!saved) {
+            return
+        }
+
+        navigate('/payment')
+    }
 
     return (
         <>
@@ -57,7 +72,10 @@ export default function Cart() {
                             <Typography variant='h6' sx={{ mb: 2 }}>
                                 Your cart is empty.
                             </Typography>
-                            <Button component={Link} to='/home' variant='contained'>
+                            <Button component={Link} 
+                                    to='/home' 
+                                    variant='contained'
+                                >
                                 Continue Shopping
                             </Button>
                         </CardContent>
@@ -95,7 +113,8 @@ export default function Cart() {
                                             <Typography variant='h6' sx={{fontWeight:'bold'}}>{item.title}</Typography>
                                             <Rating
                                                 name={`rating-${item.id}`}//dynamic naming of rating
-                                                value={item.rating.rate}
+                                                // value={Number(item.rating?.rate) || 0}
+                                                value={item.rating?.rate}
                                                 readOnly
                                                 size='small'
                                             />
@@ -170,11 +189,10 @@ export default function Cart() {
                         >
                             Clear Cart
                         </Button>
-                        <Button 
-                            component={Link}
-                            to='/payment'
+                        <Button
                             variant="contained"
                             disabled={cartItem.length === 0}
+                            onClick={handleProceedToBuy}
                         >Proceed to Buy</Button>
                     </CardActions>
                 </Card>
