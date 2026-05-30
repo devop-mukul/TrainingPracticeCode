@@ -14,8 +14,8 @@ export default function ProductDetails() {
   const { products } = useContext(ProductContext);
   const { cartItem, handleIncrease, handleDecrease } = useContext(CartContext);
 
-  const product = products.find((p) => String(p.id) === String(id));
-  const cartProduct = cartItem.find((item) => String(item.id) === String(id));
+  const product = products.find((p) => String(p.id) === (id));
+  const cartProduct = cartItem.find((item) => String(item.id) === (id));
   // console.log("product", product, "cartproduct", cartProduct);
   
   if (!product) {
@@ -31,7 +31,7 @@ export default function ProductDetails() {
   return (
     <>
       <Navbar />
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', p: 5 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '110vh', p: 5 }}>
         <Card sx={{ maxWidth: 700, width: '100%', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, p: 2 }}>
           <CardMedia
             component="img"

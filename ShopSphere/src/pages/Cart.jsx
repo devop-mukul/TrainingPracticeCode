@@ -53,7 +53,7 @@ export default function Cart() {
     }
 
     return (
-        <>
+        <Box sx={{width:'100%', pt:10, pl:2}}>
             <Navbar />
             <Stack direction='row' spacing={2}>
                 <Card
@@ -197,6 +197,6 @@ export default function Cart() {
                     </CardActions>
                 </Card>
             </Stack>
-        </>
+        </Box>
     )
 }

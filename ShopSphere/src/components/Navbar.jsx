@@ -1,12 +1,10 @@
-import React, { useContext } from 'react'
-import { Typography, Box, Button, Stack } from '@mui/material'
+import React, { useContext, useState } from 'react'
+import { Typography, Box, Button, Stack, Menu, MenuItem } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import TextField from '@mui/material/TextField';
 
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
 import Badge, { badgeClasses } from '@mui/material/Badge';
 
 import { ProductContext } from '../context/ProductContext'
@@ -26,6 +24,12 @@ export default function Navbar() {
     const { totalItems } = useContext(CartContext)
     const {user, signOut} = useAuth()
     const navigate = useNavigate()
+
+    const [sellerMenuAnchor, setSellerMenuAnchor] = useState(null)
+    console.log(sellerMenuAnchor);
+    
+    const isSellerMenuOpen = Boolean(sellerMenuAnchor)
+
     const CartBadge = styled(Badge)(({ theme }) => ({
         [`& .${badgeClasses.badge}`]: {
             top: -0.5,
@@ -46,6 +50,24 @@ export default function Navbar() {
         }
 
         navigate(`/`, { replace: true })
+    }
+
+    function openSellerMenu(event) {
+        setSellerMenuAnchor(event.currentTarget)
+    }
+
+    function closeSellerMenu() {
+        setSellerMenuAnchor(null)
+    }
+
+    function goToAddSeller() {
+        closeSellerMenu()
+        navigate('/seller/add')
+    }
+
+    function goToSellerList() {
+        closeSellerMenu()
+        navigate('/seller/list')
     }
 
     return (
@@ -90,10 +112,22 @@ export default function Navbar() {
                                 })}
                                 variant="text" 
                                 sx={{color:'primary.contrastText'}}>About</Button>
-                            <Button 
-                                variant="text" 
+                            <Button
+                                variant="text"
                                 sx={{color:'primary.contrastText'}}
-                                endIcon={<ArrowDropDownIcon />}>Categories</Button>
+                                onClick={openSellerMenu}
+                                endIcon={<ArrowDropDownIcon />}
+                            >
+                                Sellers
+                            </Button>
+                            <Menu
+                                anchorEl={sellerMenuAnchor}
+                                open={isSellerMenuOpen}
+                                onClose={closeSellerMenu}
+                            >
+                                <MenuItem onClick={goToAddSeller}>Add Seller</MenuItem>
+                                <MenuItem onClick={goToSellerList}>Seller List</MenuItem>
+                            </Menu>
                     </Stack>
                 </Box>
                 <Box
@@ -115,6 +149,7 @@ export default function Navbar() {
                             width:'100%'
                         }}
                         onChange={(e) => {setSearchTerm(e.target.value)}}/>
+
                 </Box>
                 <Box>
                     <Stack direction='row' spacing={2} 

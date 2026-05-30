@@ -12,7 +12,7 @@ export default function Home() {
   const { filteredProducts } = useContext(ProductContext)
 
   return (
-    <Box sx={{ display:'flex', flexDirection:'row' }}>
+    <Box sx={{ display:'flex', flexDirection:'row', pt:10, pl:5 }}>
       <Navbar />
       <Sidebar />
       <Box sx={{ display:'flex', flexWrap:'wrap', gap:2, p:2, justifyContent:'center' }}>

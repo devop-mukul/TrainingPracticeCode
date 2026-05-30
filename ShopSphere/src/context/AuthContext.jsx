@@ -8,7 +8,9 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         let mounted = true
-
+        // console.log("supabase",supabase);
+        // console.log("supabase.auth",supabase.auth);
+        
         supabase.auth.getSession().then(({ data }) => {
             if(!mounted) return
             setUser(data?.session?.user ?? null) 

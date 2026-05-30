@@ -6,7 +6,7 @@ import {TextField} from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
 import LockIcon from '@mui/icons-material/Lock'
 
-import {Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 import { supabase } from '../utils/supabaseClient'
 
@@ -15,6 +15,7 @@ import {useAuth} from '../context/AuthContext'
 export default function Login() {
   const { signIn } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
   // const handleLogin = async (email, password) => {
   //   const { data, error } = await supabase.auth.signInWithPassword({email, password,});
 
@@ -35,11 +36,13 @@ export default function Login() {
     console.log(email, password);
     
     const result = await signIn(email, password)
-    console.log((result));
+    console.log(location);
+    
     if(result.ok){
-      navigate(`/home`, { replace: true})
+        const redirectTo = location.state?.from?.pathname || '/home'
+        navigate(redirectTo, { replace: true})
     } else {
-      alert(result.error.message)
+        alert(result.error.message)
     }
   }
 

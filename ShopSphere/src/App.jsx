@@ -15,20 +15,27 @@ import Login from './pages/Login'
 import Cart from './pages/Cart'
 import PaymentPage from './pages/PaymentPage'
 import ProductDetails from './pages/ProductDetails'
+import NotFound from './pages/NotFound'
+
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
     <>
-      <Box sx={{ p: 2, pt: '72px', bgcolor: 'background.default'}}>
+      {/* <Box sx={{ p: 2, pt: '72px', bgcolor: 'background.default'}}> */}
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/payment" element={<PaymentPage />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
+
+            <Route element={<PrivateRoute />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/payment" element={<PaymentPage />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
+            </Route>
+              <Route path="*" element={<NotFound />} />
           </Routes>
-      </Box>
+      {/* </Box> */}
     </>
   )
 }

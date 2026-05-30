@@ -66,6 +66,7 @@ export function ProductProvider({ children }) {
         })
     }, [products, debouncedSearch, selectedCategories, selectedPriceRange, selectedRating])
 
+    // const category = products.filter
     const value = {
         searchTerm,
         setSearchTerm,
