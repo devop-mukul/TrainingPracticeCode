@@ -170,7 +170,7 @@ export default function Cart() {
                 <Card
                     sx={{
                         width:cardWidth-"auto",
-                        maxHeight:"30vh",
+                        maxHeight:"40vh",
                         p:2
                     }}
                 >

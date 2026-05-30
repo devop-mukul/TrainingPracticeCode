@@ -8,6 +8,7 @@ import {BrowserRouter} from 'react-router-dom'
 
 import { ProductProvider } from './context/ProductContext'
 import { CartProvider } from './context/CartContext'
+import {AuthProvider} from './context/AuthContext'
 
 import theme from './theme'
 
@@ -16,11 +17,13 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ProductProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
-        </ProductProvider>
+        <AuthProvider>
+          <ProductProvider>
+            <CartProvider>
+              <App />
+            </CartProvider>
+          </ProductProvider>
+        </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,

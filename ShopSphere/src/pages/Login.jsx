@@ -10,27 +10,37 @@ import {Link, useNavigate} from 'react-router-dom'
 
 import { supabase } from '../utils/supabaseClient'
 
+import {useAuth} from '../context/AuthContext'
 
 export default function Login() {
+  const { signIn } = useAuth()
   const navigate = useNavigate()
-  const handleLogin = async (email, password) => {
-    const { data, error } = await supabase.auth.signInWithPassword({email, password,});
+  // const handleLogin = async (email, password) => {
+  //   const { data, error } = await supabase.auth.signInWithPassword({email, password,});
 
-    if(error) {
-      console.error('Login error:', error.message);
-    } else {
-        console.log('Login successfull', data);
+  //   if(error) {
+  //     console.error('Login error:', error.message);
+  //   } else {
+  //       console.log('Login successfull', data);
       
-    }
-  };
+  //   }
+  // };
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    handleLogin(email, password)
-    navigate(`/home`, { replace: true})
+    // handleLogin(email, password)
+    console.log(email, password);
+    
+    const result = await signIn(email, password)
+    console.log((result));
+    if(result.ok){
+      navigate(`/home`, { replace: true})
+    } else {
+      alert(result.error.message)
+    }
   }
 
     return (
@@ -45,6 +55,8 @@ export default function Login() {
             }}
         >
             <Card elevation={6}
+                component="form"
+                onSubmit={handleSubmit}
                 sx={{
                     width:{
                       xs:'100%',

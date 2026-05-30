@@ -12,16 +12,20 @@ import Badge, { badgeClasses } from '@mui/material/Badge';
 import { ProductContext } from '../context/ProductContext'
 import { CartContext } from '../context/CartContext'
 
-import {Link, NavLink} from 'react-router-dom'
+import {Link, NavLink, useNavigate} from 'react-router-dom'
 
 import { styled } from '@mui/material/styles';
 
 import PersonIcon from '@mui/icons-material/Person';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
+import {useAuth} from '../context/AuthContext'
+
 export default function Navbar() {
     const { searchTerm, setSearchTerm } = useContext(ProductContext)
     const { totalItems } = useContext(CartContext)
+    const {user, signOut} = useAuth()
+    const navigate = useNavigate()
     const CartBadge = styled(Badge)(({ theme }) => ({
         [`& .${badgeClasses.badge}`]: {
             top: -0.5,
@@ -32,6 +36,18 @@ export default function Navbar() {
             height: '18px',
         },
     }));
+
+    async function userLogout() {
+        const result = await signOut()
+
+        if (!result?.ok) {
+            console.error('Logout error:', result?.error?.message)
+            return
+        }
+
+        navigate(`/`, { replace: true })
+    }
+
     return (
         <AppBar sx={{
             position:'fixed',
@@ -57,7 +73,7 @@ export default function Navbar() {
                             gap:2
                         }}
                         >
-                            <Typography variant="h4" sx={{color:'white', fontWeight:'bold'}}>ShopSphere</Typography>
+                            <Typography onClick={() => navigate(`/home`)} variant="h4" sx={{color:'white', fontWeight:'bold', cursor:'pointer'}}>ShopSphere</Typography>
                             <Button 
                                 component={NavLink}
                                 to='/home' 
@@ -122,8 +138,10 @@ export default function Navbar() {
                                 </CartBadge>
                             }
                         >Cart</Button>
-                        <Button startIcon={<PersonIcon />} sx={{color:'white'}}>
-                            Login
+                        <Button startIcon={<PersonIcon />} sx={{color:'white'}}
+                            onClick={userLogout}
+                        >
+                            {user ? 'Logout' : 'Login'}
                         </Button>
                     </Stack>
                 </Box>
