@@ -157,7 +157,7 @@ export default function Login() {
                 open={snackbar.open}
                 autoHideDuration={3000}
                 onClose={handleSnackbarClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             >
                 <Alert
                     onClose={handleSnackbarClose}
