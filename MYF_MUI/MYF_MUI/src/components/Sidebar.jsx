@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import {
     IconButton, Typography, Box,
@@ -47,6 +48,7 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 export default function Sidebar({ open, setOpen }) {
     const drawerWidth = 230
     const [openMenu, setOpenMenu] = useState({})
+    const navigate = useNavigate()
     const menuItems = [
         {
             id: 'Setup',
@@ -67,6 +69,10 @@ export default function Sidebar({ open, setOpen }) {
                 },
                 {
                     id: 'Drivers',
+                    icon: <GroupIcon />
+                },
+                {
+                    id: 'Card-Driver Mapping',
                     icon: <GroupIcon />
                 }
             ]
@@ -220,6 +226,12 @@ export default function Sidebar({ open, setOpen }) {
         // setOpen(!open)
     }
 
+    function handleSubItemClick(subItemId) {
+        if (subItemId === 'Card-Driver Mapping') {
+            navigate('/loggedHome/card-driver-mapping')
+        }
+    }
+
     return (
         <>
             <Drawer 
@@ -299,7 +311,7 @@ export default function Sidebar({ open, setOpen }) {
                                         key={subitem.id}
                                         sx={{ pl: 2 }}
                                         >
-                                            <ListItemButton>
+                                            <ListItemButton onClick={() => handleSubItemClick(subitem.id)}>
                                                 {/* {console.log(subitem)} */}
                                                 <ListItemIcon sx={{flexShrink:0}}>{subitem.icon}</ListItemIcon>
                                                 <ListItemText

@@ -42,7 +42,7 @@ export default function Login() {
                 <TextField
                     autoFocus
                     autoComplete="true"
-                    sx={{p:2, my:0}}
+                    sx={{p:2, mt:2}}
                     margin="normal"
                     size="small"
                     placeholder="Email or Username"
@@ -74,7 +74,7 @@ export default function Login() {
                     }}
                 />
 
-                <Typography variant="subtitle2" sx={{color:'#9f9f9f', m:0, px:2, py:1, cursor:'pointer'}}>Forgot Password?</Typography>
+                <Typography variant="subtitle2" sx={{color:'#9f9f9f', m:0, px:2, py:1, cursor:'pointer', display:'flex', justifyContent:'right'}}>Forgot Password?</Typography>
 
                 <Button 
                     variant="contained"

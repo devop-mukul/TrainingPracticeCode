@@ -1,9 +1,10 @@
 import './App.css'
 
-import { BrowserRouter, Routes, Route, Router } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 import Login from './pages/Login'
 import LoggedHome from './pages/LoggedHome'
+import CardDriverMapping from './pages/CardDriverMapping'
 
 
 function App() {
@@ -11,7 +12,9 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Login />}/>
-        <Route path='/loggedHome' element={<LoggedHome />} />
+        <Route path='/loggedHome' element={<LoggedHome />}>
+          <Route path='card-driver-mapping' element={<CardDriverMapping />} />
+        </Route>
       </Routes>
     </>
   )

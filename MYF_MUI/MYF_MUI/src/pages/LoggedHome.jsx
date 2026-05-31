@@ -1,4 +1,6 @@
 import {useState} from 'react'
+import { Box } from '@mui/material'
+import { Outlet } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
@@ -10,7 +12,16 @@ export default function LoggedHome() {
         <>
             <Navbar onMenuClick={() => setIsDrawerOpen((prev) => !prev)} isDrawerOpen={isDrawerOpen} />
             <Sidebar open={isDrawerOpen} setOpen={setIsDrawerOpen} />
-            {/* <Grid /> */}
+            <Box
+                sx={{
+                    mt: '64px',
+                    ml: isDrawerOpen ? '230px' : '50px',
+                    transition: '0.2s',
+                    minHeight: 'calc(100vh - 64px)'
+                }}
+            >
+                <Outlet />
+            </Box>
         </>
     )
 }
