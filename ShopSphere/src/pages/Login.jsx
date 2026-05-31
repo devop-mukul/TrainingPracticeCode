@@ -1,19 +1,20 @@
 import React,{useState} from 'react'
 import {Typography, Box, Button, InputAdornment} from '@mui/material'
 import {Card, CardMedia} from '@mui/material'
-import {TextField} from '@mui/material'
+import {TextField, IconButton} from '@mui/material'
 
 import PersonIcon from '@mui/icons-material/Person'
 import LockIcon from '@mui/icons-material/Lock'
 
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-
-import { supabase } from '../utils/supabaseClient'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import {useAuth} from '../context/AuthContext'
 
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
 export default function Login() {
-  const { signIn } = useAuth()
+  const { signIn, loading } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   // const handleLogin = async (email, password) => {
@@ -29,14 +30,15 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [visibility, setVisibility] = useState(false)
 
   async function handleSubmit(e) {
     e.preventDefault();
     // handleLogin(email, password)
-    console.log(email, password);
+    // console.log(email, password);
     
     const result = await signIn(email, password)
-    console.log(location);
+    // console.log(location);
     
     if(result.ok){
         const redirectTo = location.state?.from?.pathname || '/home'
@@ -44,6 +46,10 @@ export default function Login() {
     } else {
         alert(result.error.message)
     }
+  }
+
+  function passwordVisibility() {
+    return visibility ? <VisibilityIcon /> : <VisibilityOffIcon />
   }
 
     return (
@@ -106,7 +112,7 @@ export default function Login() {
                         fullWidth
                         required
                         autoComplete="current-password"
-                        type='password'
+                        type={visibility ? "text" : "password"}
                         // sx={{p:2, my:0, mb:0}}
                         // margin="normal"
                         size="small"
@@ -116,6 +122,16 @@ export default function Login() {
                                 startAdornment: (
                                     <InputAdornment position="start">
                                         <LockIcon size="small"/>
+                                    </InputAdornment>
+                                ),
+                                endAdornment : (
+                                    <InputAdornment position="end">
+                                        <IconButton 
+                                            onClick={() => setVisibility((prev) => !prev)}
+                                            edge="end"
+                                        >
+                                            {visibility ? (<VisibilityIcon/>) : (<VisibilityOffIcon />) }
+                                        </IconButton>
                                     </InputAdornment>
                                 )
                             }
@@ -133,10 +149,10 @@ export default function Login() {
                         type="submit"
                         variant="contained"
                         size="small"
+                        loading={loading}
+                        loadingPosition="start"
+                        disabled={loading}
                         sx={{backgroundColor:'#EC6952'}}
-                        onClick={handleSubmit}
-                        // component={Link}
-                        // to='/home'
                     >Log In
                     </Button>
 
@@ -144,7 +160,8 @@ export default function Login() {
                         variant="contained"
                         size="small"
                         sx={{backgroundColor:'#26a69a'}}
-                    >Click here for Employee Login
+                        onClick={() => navigate('/signup')}
+                    >Sign Up
                     </Button>
             </Card>
         </Box>

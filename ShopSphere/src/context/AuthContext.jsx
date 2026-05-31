@@ -28,9 +28,30 @@ export function AuthProvider({ children }) {
         }
     }, [])
 
+    async function signUp(email, password, fullName) {
+        setLoading(true)
+        try {
+            const { data, error } = await supabase.auth.signUp({ 
+                email, password,
+                options: {
+                    data: { full_name: fullName },
+                    emailRedirectTo: window.location.origin,
+                },
+            })
+            return { ok: !error, error, data }
+        } catch (error) {
+            return { ok: false, erorr, data: null }
+        } finally {
+            setLoading(false)
+        }
+    }
     async function signIn(email, password) {
-        const { error } = await supabase.auth.signInWithPassword({email, password})
-        return { ok: !error, error}
+        setLoading(true)
+        const { error } = await supabase.auth.signInWithPassword({ email, password })
+        if (error) {
+            setLoading(false)
+        }
+        return { ok: !error, error }
     }
 
     async function signOut() {
@@ -46,6 +67,7 @@ export function AuthProvider({ children }) {
             isAuthenticated: !!user,
             signIn,
             signOut,
+            signUp,
         }
     }, [user, loading])
 

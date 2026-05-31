@@ -26,7 +26,7 @@ export default function Navbar() {
     const navigate = useNavigate()
 
     const [sellerMenuAnchor, setSellerMenuAnchor] = useState(null)
-    console.log(sellerMenuAnchor);
+    // console.log(sellerMenuAnchor);
     
     const isSellerMenuOpen = Boolean(sellerMenuAnchor)
 

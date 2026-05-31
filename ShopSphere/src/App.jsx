@@ -17,6 +17,8 @@ import PaymentPage from './pages/PaymentPage'
 import ProductDetails from './pages/ProductDetails'
 import NotFound from './pages/NotFound'
 
+import SignUp from './pages/SignUp'
+
 import PrivateRoute from './components/PrivateRoute'
 
 function App() {
@@ -25,6 +27,7 @@ function App() {
       {/* <Box sx={{ p: 2, pt: '72px', bgcolor: 'background.default'}}> */}
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
 
             <Route element={<PrivateRoute />}>
               <Route path="/home" element={<Home />} />
